@@ -40,7 +40,7 @@ class Versioner():
     ) -> None:
         try:
             promoted_model = self.run.use_artifact(
-                                        artifact_name,
+                                        f'{artifact_name}:{promotion_alias}',
                                         type=artifact_type)
         except:
             promoted_model = None
@@ -52,8 +52,7 @@ class Versioner():
             new_model_metric = new_model.metadata['val_metric']
             compare_func = COMP_FUNC[comparision_type]
 
-            if compare_func(promoted_model_metric, new_model_metric,
-                            comparision_type):
+            if compare_func(promoted_model_metric, new_model_metric):
                 aliases.append(promotion_alias)
 
                 promoted_model.aliases.remove(promotion_alias)
@@ -71,4 +70,4 @@ class Versioner():
             )
             print(*msg)
             
-        self.run.log_artifact(new_model, aliases=aliases)
+        self.run.log_artifact(new_model)
