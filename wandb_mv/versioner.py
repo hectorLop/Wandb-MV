@@ -36,7 +36,8 @@ class Versioner():
         artifact_type : str,
         comparision_metric : str,
         promotion_alias : str,
-        comparision_type : str
+        comparision_type : str,
+        already_deployed : bool = False
     ) -> None:
         try:
             promoted_model = self.run.use_artifact(
@@ -52,8 +53,12 @@ class Versioner():
             new_model_metric = new_model.metadata['val_metric']
             compare_func = COMP_FUNC[comparision_type]
 
-            if compare_func(promoted_model_metric, new_model_metric):
-                aliases.append(promotion_alias)
+            if compare_func(promoted_model_metric, new_model_metric):                
+                if already_deployed:
+                    new_model.aliases.append(promotion_alias)
+                    new_model.save()
+                else:
+                    aliases.append(promotion_alias)
 
                 promoted_model.aliases.remove(promotion_alias)
                 promoted_model.save()
@@ -68,6 +73,6 @@ class Versioner():
                 'so the new model is promoted'
             
             )
-            print(*msg)
-            
-        self.run.log_artifact(new_model)
+
+        if not already_deployed:
+            self.run.log_artifact(new_model, aliases=aliases)
