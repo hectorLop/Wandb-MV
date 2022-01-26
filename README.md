@@ -1,4 +1,7 @@
-<img src="/home/hectorlopez/Datos/Proyectos/Wandb-MV/docs/wandb_mv_logo.png" alt="wandb_mv_logo" style="zoom:30%;" />
+
+<p align="center">
+  <img src="docs/wandb_mv_logo.png" alt="wandb_mv_logo" width=550 />
+</p>
 
 ### Example of usage
 
