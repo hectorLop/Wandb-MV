@@ -121,6 +121,11 @@ class Versioner():
                 print('This new model does not improve the older one')
         else: 
             aliases.append(promotion_alias)
+            
+            if already_deployed:
+                new_model.aliases.append(promotion_alias)
+                new_model.save()
+                
             msg = (
                 f'There is no artifact named {artifact_name}:{promotion_alias}',
                 'so the new model is promoted'        
