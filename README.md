@@ -3,6 +3,13 @@
   <img src="docs/wandb_mv_logo.png" alt="wandb_mv_logo" width=550 />
 </p>
 
+### Description
+This library provides an abstraction to perform Model Versioning using Weight & Biases.
+
+### Features
+- Version a new trained model
+- Promote a model to another stage (e.g production)
+
 ### Example of usage
 
 The following code snippet shows how to promote a newly trained model to the `best_model` on the validation set. First, it creates the model providing the checkpoint path, the artifact name and type, a description, and the metadata, where the metrics or any desired information is stored.
@@ -37,8 +44,8 @@ This code snippet shows how to promote a trained model to production after being
 
 ```python
 versioner = Versioner(run)
-versioner.promote_model(new_model=best_model_art,
-                        artifact_name='detector',
+versioner.promote_model(new_model=artifact,
+                        artifact_name='prueba',
                         artifact_type='model',
                         comparision_metric='test_metric',
                         promotion_alias='production',
@@ -46,6 +53,10 @@ versioner.promote_model(new_model=best_model_art,
                         already_deployed=True
                         )
 ```
+
+### Next features
+- [ ] Allow providing a custom comparision function to promote a model
+- [ ] ...
 
 
 
