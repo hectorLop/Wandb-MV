@@ -16,10 +16,10 @@ class Versioner():
 
     def create_artifact(
         self,
-        checkpoint : str,
         artifact_name : str,
         artifact_type : str,
         description : str,
+        checkpoint : str = '',
         aliases : Optional[List[str]] = None,
         metadata : Optional[Dict] = None,
         publish : bool = False
@@ -45,7 +45,9 @@ class Versioner():
                                   type=artifact_type,
                                   description=description,
                                   metadata=metadata)
-        artifact.add_file(checkpoint)
+
+        if checkpoint:
+            artifact.add_file(checkpoint)
 
         if publish:
             self.run.log_artifact(artifact, aliases=aliases)
