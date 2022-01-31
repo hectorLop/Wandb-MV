@@ -6,6 +6,13 @@
 ### Description
 This library provides an abstraction to perform Model Versioning using Weight & Biases.
 
+### Installation
+The package can be installed using pip:
+
+```bash
+pip install wandb-mv
+```
+
 ### Features
 - Version a new trained model
 - Promote a model to another stage (e.g production)
