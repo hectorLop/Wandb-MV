@@ -139,7 +139,7 @@ class Versioner():
         if not already_deployed:
             self.run.log_artifact(new_model, aliases=aliases)
 
-    def get_latest_version(self, name : str) -> Optional[str]:
+    def get_latest_version(self, name : str) -> int:
         """
         Get the latest model version.
 
@@ -147,11 +147,12 @@ class Versioner():
             name (str): Model's name
 
         Returns:
-            Optional[str]: 
+            int: Model's version. If it does not exist, it returns -1, so 
+                the new version is the v0 version. 
         """
         try: 
             artifact = self.run.use_artifact(f'{name}:latest')
         except:
-            raise ValueError(f'Don\'t exist any model named {name}:latest')
+            return -1
 
-        return artifact.version[1]
+        return int(artifact.version[1])
