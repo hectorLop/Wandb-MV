@@ -138,3 +138,20 @@ class Versioner():
         # If the new model wasn't deployed, it must to be logged
         if not already_deployed:
             self.run.log_artifact(new_model, aliases=aliases)
+
+    def get_latest_version(self, name : str) -> Optional[str]:
+        """
+        Get the latest model version.
+
+        Args:
+            name (str): Model's name
+
+        Returns:
+            Optional[str]: 
+        """
+        try: 
+            artifact = self.run.use_artifact(f'{name}:latest')
+        except:
+            raise ValueError(f'Don\'t exist any model named {name}:latest')
+
+        return artifact.version[1]
