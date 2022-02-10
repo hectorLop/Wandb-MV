@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='wandb-mv',
-    version='0.2.5',    
+    version='0.2.6',    
     description='Model Versioning using Weight & Biases',
     url='https://github.com/hectorLop/Wandb-MV',
     author='Hector Lopez',
