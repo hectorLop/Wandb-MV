@@ -155,4 +155,4 @@ class Versioner():
         except:
             return -1
 
-        return int(artifact.version[1])
+return int(artifact.version[1:])
